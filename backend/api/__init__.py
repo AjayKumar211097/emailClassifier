@@ -9,5 +9,9 @@ app_fastapi = FastAPI()
 async def root():
     return {"Hello": "World!"}
 
+@app_fastapi.get("/health")
+async def root():
+    return {"Status": "Active"}
+
 # the simplest documented way:
 app = AsgiMiddleware(app_fastapi).main
