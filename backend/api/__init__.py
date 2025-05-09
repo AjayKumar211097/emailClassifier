@@ -1,8 +1,10 @@
-import azure.functions as func
+import azure.functions as func 
 from azure.functions import AsgiFunctionApp
 from fastapi import FastAPI, HTTPException
-from llmservice.classifier import classify_description
-from emailservice.mailer import send_email
+
+# simplified cleaner imports:
+from llmservice import classify_description
+from emailservice import send_email
 
 app_fastapi = FastAPI(title="Maintenance API")
 
