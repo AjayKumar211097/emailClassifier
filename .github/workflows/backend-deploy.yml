@@ -1,0 +1,35 @@
+name: ▶ Deploy Azure Function
+
+on:
+    push:
+        branches: [dev3]
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.10"
+
+            - name: Install dependencies
+              run: |
+                  cd backend
+                  python -m pip install --upgrade pip
+                  pip install -r requirements.txt
+
+            - name: Run tests # if you have any
+              run: |
+                  cd backend
+                  pytest
+
+            - name: Deploy to Azure Functions
+              uses: azure/functions-action@v1
+              with:
+                  app-name: my-func-app # replace with your Function App name
+                  publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+                  package: ./backend # path to your function project
