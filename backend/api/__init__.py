@@ -5,6 +5,10 @@ from fastapi import FastAPI
 from llmservice.classifier import classify_description
 from emailservice.mailer import send_email
 
+from pymongo import MongoClient
+import certifi
+
+
 app_fastapi = FastAPI()
 
 @app_fastapi.get("/")
@@ -28,5 +32,16 @@ async def read_records():
 @app_fastapi.get("/maintenance/{id}")
 async def read_record(id: int):
     return {"Message": f"{id} Read Success"}
+
+# MongoDB connection
+ProdDB = "mongodb+srv://skoglund1:JakobSkoglund2001@junet-cluster.uzee4js.mongodb.net/?retryWrites=true&w=majority&appName=Junet-Cluster"
+client = MongoClient(ProdDB, tlsCAFile=certifi.where())
+db = client["llm_analys"]
+collection = db["driftstorningar"]
+
+@app_fastapi.get("/driftstorningar")
+async def get_driftstorningar():
+    data = list(collection.find({}, {"_id": 0}))
+    return data
 
 app = AsgiMiddleware(app_fastapi).main
