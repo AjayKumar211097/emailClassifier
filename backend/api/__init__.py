@@ -3,7 +3,7 @@ from azure.functions import AsgiFunctionApp
 from fastapi import FastAPI, HTTPException
 
 # simplified cleaner imports:
-from llmservice import classify_description
+""" from llmservice import classify_description
 from emailservice import send_email
 
 app_fastapi = FastAPI(title="Maintenance API")
@@ -20,7 +20,11 @@ async def create_record(data: dict):
         subject=f"[{data['provider']}] Maintenance – {tag}",
         body=f"{data['description']}\nStart: {data['start_time']}\nEnd: {data['end_time']}"
     )
-    return {"Message": "Email Sent"}
+    return {"Message": "Email Sent"} """
+
+@app_fastapi.get("/")
+async def root():
+    return {"status": "Backend är igång!"}
 
 @app_fastapi.get("/maintenance/")
 async def read_records():
