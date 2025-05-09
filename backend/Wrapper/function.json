@@ -1,0 +1,18 @@
+{
+    "scriptFile": "__init__.py",
+    "entryPoint": "app",
+    "bindings": [
+        {
+            "authLevel": "anonymous",
+            "type": "httpTrigger",
+            "direction": "in",
+            "name": "req",
+            "methods": ["get", "post", "delete", "put", "patch", "options"]
+        },
+        {
+            "type": "http",
+            "direction": "out",
+            "name": "$return"
+        }
+    ]
+}
