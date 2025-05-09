@@ -35,7 +35,7 @@ jobs:
 
             - name: Zip for deployment (include deps)
               run: |
-                  cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+                  cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/api
                   zip -r release.zip . -x "*.venv/*"
                   mv release.zip $GITHUB_WORKSPACE/
 
