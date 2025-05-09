@@ -1,12 +1,13 @@
 import azure.functions as func 
 from azure.functions import AsgiFunctionApp
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
+
+app_fastapi = FastAPI(title="Maintenance API")
 
 # simplified cleaner imports:
 """ from llmservice import classify_description
 from emailservice import send_email
 
-app_fastapi = FastAPI(title="Maintenance API")
 
 @app_fastapi.get("/")
 async def root():
