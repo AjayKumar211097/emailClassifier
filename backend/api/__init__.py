@@ -13,5 +13,4 @@ async def root():
 async def health():
     return {"Status": "Active"}
 
-# the simplest documented way:
 app = AsgiMiddleware(app_fastapi).main
